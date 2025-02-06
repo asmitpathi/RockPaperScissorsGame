@@ -7,18 +7,30 @@ let compDisplayScore=document.querySelector("#comp-score");
 const choices= document.querySelectorAll(".choice");
 const msg= document.querySelector("#msg");
 
+//comp choice
 const genCompChoice= () =>{
     const options=["rock","paper","scissors"];
     const rndIdx= Math.floor(Math.random()*3);
     return options[rndIdx];
 };
 
+//userchoice
+choices.forEach((choice)=> {
+    choice.addEventListener("click",() => {
+        const userChoice= choice.getAttribute("id");
+        playGame(userChoice);
+    });
+});
+
+
+//draw game
 const drawGame=()=>{
     console.log("Draw Game");
     msg.innerText= "Draw Game! Play Again.";
     msg.style.backgroundColor="#48aaa3";
 };
 
+//winner
 const showWinner=(userWin, userChoice, compChoice)=>{
     if(userWin==true){
         userScore++;
@@ -34,6 +46,7 @@ const showWinner=(userWin, userChoice, compChoice)=>{
     }
 };
 
+//game
 const playGame= (userChoice)=>{
     const compChoice= genCompChoice();
     if(userChoice=== compChoice){
@@ -53,10 +66,3 @@ const playGame= (userChoice)=>{
         showWinner(userWin, userChoice, compChoice);
     }
 };
-
-choices.forEach((choice)=> {
-    choice.addEventListener("click",() => {
-        const userChoice= choice.getAttribute("id");
-        playGame(userChoice);
-    });
-});
